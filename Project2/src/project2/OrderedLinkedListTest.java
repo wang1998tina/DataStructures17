@@ -26,7 +26,7 @@ public class OrderedLinkedListTest {
 		
 		
 	}
-	
+	/*
 	@Test
 	public void testaddStringsWIndex() {
 		OrderedLinkedList<String> list = new OrderedLinkedList<>();
@@ -38,7 +38,7 @@ public class OrderedLinkedListTest {
 		list.add(three);
 		assertTrue(list.getHead().getElement().equals(two));
 		assertTrue(list.getTail().getElement().equals(one));
-		
+		*/
 	}
 	
 	

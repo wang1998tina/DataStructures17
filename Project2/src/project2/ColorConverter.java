@@ -18,14 +18,14 @@ public class ColorConverter {
 		 * Try/catch block below. Try block contains the entire program I'm running,
 		 * and catch blocks will handle exceptions that arise.
 		 * 
+		 * @throws IOException if file not valid or inputted
+		 * @throws IllegalArgumentException if an argument is not valid.
+		 * 
 		 */
 		try {
 			Scanner reader = new Scanner(new File(args[0]));
 		
-			if (args[0].length()<1) {
-				throw new IllegalArgumentException("Usage Error: the program "
-						+ "expects file name as an argument.");
-			} 
+
 		
 			//create arraylist
 			ColorList<Color> colors = new ColorList<>();
@@ -52,7 +52,7 @@ public class ColorConverter {
 				
 			} while (reader.hasNext());//while there is more of file to be read
 			
-			reader.close();
+			reader.close();//prevent leak
 			
 			
 
@@ -127,12 +127,18 @@ public class ColorConverter {
 		} catch (IllegalArgumentException e) {
 			System.err.print("Illegal argument");
 			System.exit(2);
-		}
+		} catch (NullPointerException e) {
+			System.err.print("Null pointer");
+		} catch (ClassCastException e) {
+			System.err.print("Class does not match");
+		} catch (IndexOutOfBoundsException e) {
+			System.err.print("Invalid index");
+		} 
 
 }
 	
 	/**
-	 * Converts substring of hex value to RGB.
+	 * Converts two-digit substring of hex value to int RGB value.
 	 * 
 	 * @param hexSubstr is two characters in the hex value that get converted
 	 * into either a red, green, or blue value.
@@ -141,7 +147,6 @@ public class ColorConverter {
 	
 	
 	public static int convertToRGB(String hexSubstr) {
-		//TODO check if right
 		return Integer.valueOf(hexSubstr,16);
 	}
 }
