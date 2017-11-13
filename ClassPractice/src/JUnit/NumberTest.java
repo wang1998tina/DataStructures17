@@ -43,6 +43,7 @@ public class NumberTest {
 		try{
 			Number x = null;
 			Number c = new Number(4);
+			
 			c.add(x);
 		} catch (Exception e) {
 			assertEquals(e.getClass(), NullPointerException.class);
@@ -51,7 +52,16 @@ public class NumberTest {
 
 	@Test
 	public void testMultiply() {
-		fail("Not yet implemented");
+		try{
+			Number x = null;
+			Number c = new Number(4);
+			Number n = new Number(1000000000);
+			c.
+			c.add(x);
+			
+		} catch (Exception e) {
+			assertEquals(e.getClass(), NullPointerException.class);
+		}
 	}
 
 	@Test
