@@ -63,8 +63,20 @@ public class CollisionObjectTest {
 		entries1.add("1");
 	}
 
+	@Test
+	public void testEmptyInjuries() {
+		try {
+			entries.set(10, "");
+			Collision col = new Collision(entries);
+			fail();
+		} catch(Exception e) {
+			assertTrue(e.getClass().equals(IllegalArgumentException.class));
+		}
+		
+	}
 	
-	@Test 
+	
+	/*@Test 
 	 public void testequals() {
 		Collision col = new Collision(entries);
 		Collision col1 = new Collision(entries1);
@@ -210,7 +222,7 @@ public class CollisionObjectTest {
 		
 		
 		
-	}
+	}*/
 
 	
 

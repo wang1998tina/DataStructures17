@@ -23,9 +23,11 @@ public class ColorConverter {
 		 * 
 		 */
 		try {
+			
+		
 			Scanner reader = new Scanner(new File(args[0]));
 		
-
+			
 		
 			//create arraylist
 			ColorList<Color> colors = new ColorList<>();

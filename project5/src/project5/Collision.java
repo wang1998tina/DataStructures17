@@ -49,7 +49,8 @@ public class Collision implements Comparable<Collision>{
 		}
 		
 		//zip
-		if(isDigit(entries.get(3)) && entries.get(3).length()==5) {
+		if(isDigit(entries.get(3)) && entries.get(3).length()==5 
+				&& Integer.parseInt(entries.get(3))>0) {
 			zip = entries.get(3);
 			
 		} else {
@@ -58,14 +59,14 @@ public class Collision implements Comparable<Collision>{
 		
 		//num of injuries/deaths
 		try {
-			personsInjured = Integer.parseInt(entries.get(8));
-			personsKilled = Integer.parseInt(entries.get(9));
-			pedestriansInjured = Integer.parseInt(entries.get(10));
-			pedestriansKilled = Integer.parseInt(entries.get(11));
-			cyclistsInjured = Integer.parseInt(entries.get(12));
-			cyclistsKilled = Integer.parseInt(entries.get(13));
-			motoristsInjured = Integer.parseInt(entries.get(14));
-			motoristsKilled = Integer.parseInt(entries.get(15));
+			personsInjured = Integer.parseInt(entries.get(10));
+			personsKilled = Integer.parseInt(entries.get(11));
+			pedestriansInjured = Integer.parseInt(entries.get(12));
+			pedestriansKilled = Integer.parseInt(entries.get(13));
+			cyclistsInjured = Integer.parseInt(entries.get(14));
+			cyclistsKilled = Integer.parseInt(entries.get(15));
+			motoristsInjured = Integer.parseInt(entries.get(16));
+			motoristsKilled = Integer.parseInt(entries.get(17));
 			
 			
 		}catch(Exception e) {
@@ -81,8 +82,8 @@ public class Collision implements Comparable<Collision>{
 			
 		
 		//key
-		if(!(entries.get(21).length()==0)) {
-			key = entries.get(21);
+		if(!(entries.get(24).length()==0)) {
+			key = entries.get(24);
 		} else {
 			throw new IllegalArgumentException("invalid key in constructor");
 		}
