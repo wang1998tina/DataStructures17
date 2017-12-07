@@ -42,10 +42,17 @@ public class CollisionsDataTest {
 		
 	}
 	
+	@Test
+	public void testGetters() {
+		Collision col = new Collision(entries);
+		Date date = new Date("01/01/2000");
+		assertTrue(col.getZip().equals("10013"));
+		assertTrue(col.date.equals(date));
+		
+	}
 	
 	
-	
-	/*@Test
+	@Test
 	public void testRemoveThreeNodes() {
 		entries.set(3, "10011");
 		Collision col = new Collision(entries);
@@ -69,8 +76,9 @@ public class CollisionsDataTest {
 		assertTrue(tree.root.data.equals(col));
 		assertTrue(tree.root.right.data.equals(col2));
 		assertTrue(tree.root.height==2);
+		assertTrue(tree.root.data.getZip().equals("10011"));
 		
-	}*/
+	}
 	
 	/*@Test
 	public void testSimpleRemove() {

@@ -12,10 +12,8 @@ import java.util.ArrayList;
 /*
  * TESTING NOTES
  * - for comapreTo and equals, can null be passed?
- * - for equals, if zip and date are diff but key same does it still equal?
- * 
- * 
- * 
+ * - for equals, if zip and date are diff but key same does 
+ * it still equal?
  * 
  */
 public class Collision implements Comparable<Collision>{
@@ -40,7 +38,9 @@ public class Collision implements Comparable<Collision>{
 	 */
 	public Collision (ArrayList<String> entries)throws IllegalArgumentException{
 		
-		//TODO handle if entries.length==0
+		if(entries.size()<24) {
+			throw new IllegalArgumentException("Input not long enough");
+		}
 		
 		//date
 		try {
@@ -52,7 +52,7 @@ public class Collision implements Comparable<Collision>{
 		
 		//zip
 		if(isDigit(entries.get(3)) && entries.get(3).length()==5 
-				&& Integer.parseInt(entries.get(3))>0) {
+				&& Integer.parseInt(entries.get(3))>0){
 			zip = entries.get(3);
 			
 		} else {
@@ -81,18 +81,13 @@ public class Collision implements Comparable<Collision>{
 			throw new IllegalArgumentException("Injuries/deaths should be a "
 					+ "nonnegative integer");
 		}
-			
 		
-		//key
-		if(!(entries.get(24).length()==0)) {
-			key = entries.get(24);
-		} else {
-			throw new IllegalArgumentException("invalid key in constructor");
-		}
+			key = entries.get(23);
 		
 	}
-
-
+	
+	
+	
 	/**
 	 * Overrides Comparable. Based on zip code, date, key, in order of priority. If comparing
 	 * based on zip code, pos int returned if this object has larger int value. If comparing

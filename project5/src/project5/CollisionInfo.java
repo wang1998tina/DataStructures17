@@ -16,22 +16,34 @@ public class CollisionInfo {
 	public static void main(String[] args) {
 		
 		CollisionsData tree = new CollisionsData(); //initialize tree
+		Scanner reader;
+		String line;
 		
 		try {
+			
 			
 			if(args.length==0) {
 				throw new IOException("No file name specified.");
 			}
-			Scanner reader = new Scanner(new File(args[0]));
-			String line = reader.nextLine(); //discard
+			
+			reader = new Scanner(new File(args[0]));
+			line = reader.nextLine(); //discard header line
 			
 			do {
 				line = reader.nextLine();
 				
 				ArrayList<String> entries = splitCSVLine(line);
 				
-				Collision col = new Collision(entries); //CHECK
-				tree.add(col);
+				//creates objects and adds to tree if valid
+				//will skip over line if not valid
+				try {
+					Collision col = new Collision(entries); 
+					tree.add(col);
+				} catch(IllegalArgumentException e) {
+					//System.err.println(e.getMessage());
+					continue;
+				}
+			
 				
 			} while(reader.hasNext());
 			
@@ -44,24 +56,32 @@ public class CollisionInfo {
 			System.err.println(e.getMessage());
 			System.exit(2);
 		}
+		
+		
 			
 		//----end file input-----
 			
+		//var used for while loop
 		boolean checkForQuit = true;
 		Scanner input = new Scanner(System.in);
+		
+		//user input block
 		while(checkForQuit) {
 			String zip = "";
 			String startDateStr = "";
 			String endDateStr = "";
+			
 			//ask for zip
 			System.out.println("Enter a zip code (or 'quit' to exit):");
 			zip = input.next();
+			
 			//if quit
 			if(zip.equalsIgnoreCase("quit")) {
 				checkForQuit = false;
 				System.err.println("Program terminated.");
 				System.exit(3);
 			}
+			
 			//validate zip
 			if(!isDigit(zip) || zip.length()!=5 
 					|| Integer.parseInt(zip)<0) {
@@ -72,6 +92,8 @@ public class CollisionInfo {
 			System.out.println("Enter start date (MM/DD/YYYY):");
 			startDateStr = input.next();
 			Date startDate;
+			
+			//validate format
 			try {
 				startDate = new Date(startDateStr);
 			} catch(Exception e) {
@@ -79,21 +101,37 @@ public class CollisionInfo {
 						+ "in MM/DD/YYYY format.");
 				continue;
 			}
+			
 			//ask for end date
 			Date endDate;
 			System.out.println("Enter end date (MM/DD/YYYY):");
 			endDateStr = input.next();
+			
+			//validate correct format
 			try {
 				endDate = new Date(endDateStr);
-			} catch(Exception e) {
+				
+			} catch(IllegalArgumentException e) {
 				System.err.println("Invalid date format. Make sure it is" 
 						+ "in MM/DD/YYYY format.");
 				continue;
+			} 
+			
+			//validate that end date is after start
+			try {
+				if(endDate.compareTo(startDate)<0) {
+					throw new IllegalArgumentException("End date"
+							+ "cannot be before start date");
+				}
+			} catch(IllegalArgumentException e) {
+				System.err.println(e.getMessage());
+				continue;
 			}
+			
 			
 			//print report
 			System.out.println(tree.getReport(zip, startDate, endDate));
-			
+
 				
 		}//end of while
 			
@@ -103,7 +141,8 @@ public class CollisionInfo {
 	
 	
 	/**
-	 * checks if a string contains an int
+	 * c
+	 * hecks if a string contains an int
 	 * @param str
 	 * @return
 	 */

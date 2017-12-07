@@ -95,6 +95,7 @@ public class CollisionsData {
 		
 		return node;
 	}
+
 	
 	/*
 	 * Actual recursive implementation of remove method: perform the removal.  
@@ -313,18 +314,20 @@ public class CollisionsData {
 	protected void BSReport(Node<Collision> n, String zip, Date startDate, Date endDate, 
 			int[] reportArray) {
 		if(n==null) {return;}
+		System.out.println(n.data.getZip());
+		System.out.println(zip);
 		if(n.data.getZip().equals(zip)){
-			if(n.data.getDate().compareTo(startDate)>0 
-					&& n.data.getDate().compareTo(endDate)<0) {
-				reportArray[0] += 1;
-				reportArray[1] += n.data.personsInjured;
-				reportArray[2] += n.data.personsKilled;
-				reportArray[3] += n.data.pedestriansInjured;
-				reportArray[4] += n.data.pedestriansKilled;
-				reportArray[5] += n.data.cyclistsInjured;
-				reportArray[6] += n.data.cyclistsKilled;
-				reportArray[7] += n.data.motoristsInjured;
-				reportArray[8] += n.data.motoristsKilled;
+			if(n.data.getDate().compareTo(startDate)>=0 
+					&& n.data.getDate().compareTo(endDate)<=0) {
+				reportArray[0] = reportArray[0] + 1;
+				reportArray[1] = reportArray[1] + n.data.personsInjured;
+				reportArray[2] = reportArray[2] + n.data.personsKilled;
+				reportArray[3] = reportArray[3] + n.data.pedestriansInjured;
+				reportArray[4] = reportArray[4] + n.data.pedestriansKilled;
+				reportArray[5] = reportArray[5] + n.data.cyclistsInjured;
+				reportArray[6] = reportArray[6] + n.data.cyclistsKilled;
+				reportArray[7] = reportArray[7] + n.data.motoristsInjured;
+				reportArray[8] = reportArray[8] + n.data.motoristsKilled;
 			}
 		}
 		if(n.data.zip.compareTo(zip)>0) {
