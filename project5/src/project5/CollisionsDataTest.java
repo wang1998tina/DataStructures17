@@ -42,6 +42,9 @@ public class CollisionsDataTest {
 		
 	}
 	
+	
+	
+	
 	/*@Test
 	public void testRemoveThreeNodes() {
 		entries.set(3, "10011");
@@ -64,12 +67,14 @@ public class CollisionsDataTest {
 		tree.add(col5);
 		tree.remove(col1);
 		assertTrue(tree.root.data.equals(col));
-		//assertTrue(tree.root.right.data.equals(col2));
+		assertTrue(tree.root.right.data.equals(col2));
+		assertTrue(tree.root.height==2);
 		
 	}*/
 	
-	@Test
+	/*@Test
 	public void testSimpleRemove() {
+		
 		Collision col = new Collision(entries);
 		entries.set(3, "10012");
 		Collision col1 = new Collision(entries);
@@ -78,7 +83,7 @@ public class CollisionsDataTest {
 		tree.remove(col1);
 		assertTrue(tree.root.data.equals(col));
 		assertTrue(tree.root.left==null);
-	}
+	}*/
 
 	/*@Test
 	public void testLLMultipleNodes() {

@@ -1,8 +1,6 @@
 package project5;
 
-import java.util.ArrayList;
 
-import project5.BST_Recursive.Node;
 
 public class CollisionsData {
 	
@@ -69,6 +67,7 @@ public class CollisionsData {
 		return found;
 	}
 
+	
 
 	/*
 	 * Actual recursive implementation of remove method: find the node to remove.  
@@ -77,9 +76,9 @@ public class CollisionsData {
 	 */
 	private Node<Collision> recRemove(Collision target, Node<Collision> node)
 	{
-		if (node == null)
+		if (node == null) {
 			found = false;
-		else if (target.compareTo(node.data) < 0)
+		}else if (target.compareTo(node.data) < 0)
 			node.left = recRemove(target, node.left);
 		else if (target.compareTo(node.data) > 0)
 			node.right = recRemove(target, node.right );
@@ -87,10 +86,13 @@ public class CollisionsData {
 			node = removeNode(node); //replaces node
 			found = true;
 			numOfElements--;
+			
+		}
+		if(node!= null) {
+			updateHeight(node); 
+			node = balanceTree(node);
 		}
 		
-		updateHeight(node);
-		node = balanceTree(node);
 		return node;
 	}
 	

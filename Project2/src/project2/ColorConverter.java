@@ -57,6 +57,9 @@ public class ColorConverter {
 			reader.close();//prevent leak
 			
 			
+			
+			
+			
 
 			boolean checkForQuit = true;
 			boolean inArray=false;
@@ -131,6 +134,7 @@ public class ColorConverter {
 			System.exit(2);
 		} catch (NullPointerException e) {
 			System.err.print("Null pointer");
+			System.exit(3);
 		} catch (ClassCastException e) {
 			System.err.print("Class does not match");
 		} catch (IndexOutOfBoundsException e) {

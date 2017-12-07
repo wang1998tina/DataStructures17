@@ -40,6 +40,8 @@ public class Collision implements Comparable<Collision>{
 	 */
 	public Collision (ArrayList<String> entries)throws IllegalArgumentException{
 		
+		//TODO handle if entries.length==0
+		
 		//date
 		try {
 			this.date = new Date(entries.get(0));
