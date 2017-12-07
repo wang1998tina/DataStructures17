@@ -131,7 +131,7 @@ public class CollisionInfo {
 			
 			//print report
 			System.out.println(tree.getReport(zip, startDate, endDate));
-
+			System.out.print("cool");
 				
 		}//end of while
 			

@@ -43,16 +43,52 @@ public class CollisionsDataTest {
 	}
 	
 	@Test
-	public void testGetters() {
+	public void testTree1() {
+		entries.set(3, "10013");
 		Collision col = new Collision(entries);
+		entries.set(3, "10012");
+		Collision col1 = new Collision(entries);
+		entries.set(3, "10011");
+		entries.set(10, "3");
+		Collision col2 = new Collision(entries);
+		entries.set(3, "10014");
+		Collision col3 = new Collision(entries);
+		entries.set(3, "10015");
+		Collision col4 = new Collision(entries);
+		entries.set(3, "10016");
+		Collision col5 = new Collision(entries);
+		entries.set(3, "10011");
+		entries.set(0, "01/02/2000");
+		entries.set(10, "2");
+		Collision col6 = new Collision(entries);
+		entries.set(3, "10012");
+		Collision col7 = new Collision(entries);
+		entries.set(3, "10013");
+		Collision col8 = new Collision(entries);
+		entries.set(3, "10010");
+		Collision col9 = new Collision(entries);
+		entries.set(3, "10010");
+		Collision col10 = new Collision(entries);
+		tree.add(col);
+		tree.add(col1);
+		tree.add(col2);
+		tree.add(col3);
+		tree.add(col4);
+		tree.add(col5);
+		tree.add(col6);
+		//tree.add(col7);
+		//tree.add(col8);
+		tree.add(col9);
+		//tree.add(col10);
 		Date date = new Date("01/01/2000");
-		assertTrue(col.getZip().equals("10013"));
-		assertTrue(col.date.equals(date));
+		Date date1 = new Date("01/02/2000");
+		System.out.print(tree.getReport("10011", date, date1));
+		Date date3 = new Date("02/02/2002");
 		
 	}
 	
 	
-	@Test
+	/*@Test
 	public void testRemoveThreeNodes() {
 		entries.set(3, "10011");
 		Collision col = new Collision(entries);
@@ -78,7 +114,7 @@ public class CollisionsDataTest {
 		assertTrue(tree.root.height==2);
 		assertTrue(tree.root.data.getZip().equals("10011"));
 		
-	}
+	}*/
 	
 	/*@Test
 	public void testSimpleRemove() {

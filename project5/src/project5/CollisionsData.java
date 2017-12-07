@@ -294,7 +294,7 @@ public class CollisionsData {
 	 */
 	public String getReport(String zip, Date dateBegin, Date dateEnd) {
 		
-		int[] reportArray = new int[9];
+		int[] reportArray = new int[9]; 
 		BSReport(root, zip, dateBegin, dateEnd, reportArray);
 		
 		String report = "Motor Vehicle Collisions for zipcode " + zip + " (" + dateBegin.toString()
@@ -314,11 +314,11 @@ public class CollisionsData {
 	protected void BSReport(Node<Collision> n, String zip, Date startDate, Date endDate, 
 			int[] reportArray) {
 		if(n==null) {return;}
-		System.out.println(n.data.getZip());
-		System.out.println(zip);
-		if(n.data.getZip().equals(zip)){
-			if(n.data.getDate().compareTo(startDate)>=0 
-					&& n.data.getDate().compareTo(endDate)<=0) {
+		//System.out.println(n.data.getZip());
+		//System.out.println(zip);
+		if(n.data.zip.compareTo(zip)==0){
+			if(n.data.date.compareTo(startDate)>=0 
+					&& n.data.date.compareTo(endDate)<=0) {
 				reportArray[0] = reportArray[0] + 1;
 				reportArray[1] = reportArray[1] + n.data.personsInjured;
 				reportArray[2] = reportArray[2] + n.data.personsKilled;
@@ -328,11 +328,17 @@ public class CollisionsData {
 				reportArray[6] = reportArray[6] + n.data.cyclistsKilled;
 				reportArray[7] = reportArray[7] + n.data.motoristsInjured;
 				reportArray[8] = reportArray[8] + n.data.motoristsKilled;
+				System.out.println(n.data.key); 
+				
+				BSReport(n.right, zip, startDate, endDate, reportArray);
+				BSReport(n.left, zip, startDate, endDate, reportArray);
+			
 			}
+			
 		}
-		if(n.data.zip.compareTo(zip)>0) {
+		if(n.data.zip.compareTo(zip)<0) {
 			BSReport(n.right, zip, startDate, endDate, reportArray);
-		}
+		} 
 		BSReport(n.left, zip, startDate, endDate, reportArray);
 		
 		
