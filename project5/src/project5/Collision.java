@@ -3,18 +3,14 @@ package project5;
 import java.util.ArrayList;
 
 /**
- * 
+ * This class creates an instance of a Collision object,
+ * referring to a single Collision that happened in NYC. Keeps track
+ * of zip code, date it happened, a unique key, and fatalities and 
+ * injuries. 
+ * Also allows for comparison of different Collision objects.
  * 
  * @author wang1998tina
  *
- */
-
-/*
- * TESTING NOTES
- * - for comapreTo and equals, can null be passed?
- * - for equals, if zip and date are diff but key same does 
- * it still equal?
- * 
  */
 public class Collision implements Comparable<Collision>{
 
@@ -32,12 +28,18 @@ public class Collision implements Comparable<Collision>{
 	
 	
 	/**
-	 * Constructor
-	 * @param entries
-	 * @throws IllegalArgumentException
+	 * Constructor for Collision object. An ArrayList of String objects is 
+	 * passed as a parameter. Required to have at least 24 entries, but only 
+	 * certain entries have specific requirements (aka the others can be empty
+	 * entries). 
+	 * 
+	 * @param ArrayList of String objects
+	 * @throws IllegalArgumentException if any entry that corresponds to a data
+	 * field is invalid. Other entries are ignored.
 	 */
 	public Collision (ArrayList<String> entries)throws IllegalArgumentException{
 		
+		//size
 		if(entries.size()<24) {
 			throw new IllegalArgumentException("Input not long enough");
 		}
@@ -60,6 +62,7 @@ public class Collision implements Comparable<Collision>{
 		}
 		
 		//num of injuries/deaths
+		//attempt to parse into int
 		try {
 			personsInjured = Integer.parseInt(entries.get(10));
 			personsKilled = Integer.parseInt(entries.get(11));
@@ -71,10 +74,12 @@ public class Collision implements Comparable<Collision>{
 			motoristsKilled = Integer.parseInt(entries.get(17));
 			
 			
+		
 		}catch(Exception e) {
 			throw new IllegalArgumentException("Injuries/deaths should be a "
 					+ "nonnegative integer");
 		}
+		//check if negative
 		if(personsInjured<0 || personsKilled<0 || pedestriansInjured<0 ||
 			pedestriansKilled<0 || cyclistsInjured<0 || cyclistsKilled<0 ||
 			motoristsInjured<0 || motoristsKilled<0) {
@@ -82,7 +87,8 @@ public class Collision implements Comparable<Collision>{
 					+ "nonnegative integer");
 		}
 		
-			key = entries.get(23);
+		//key
+		key = entries.get(23);
 		
 	}
 	
@@ -93,6 +99,10 @@ public class Collision implements Comparable<Collision>{
 	 * based on zip code, pos int returned if this object has larger int value. If comparing
 	 * Dates, based on Date compareTo (pos value returned if this Date obj's date is later).
 	 * If comparing by key, String compareTo is used.
+	 * 
+	 * @return int based on comparison. Larger if this is larger, 0 if equals, negative if
+	 * this is smaller.
+	 * 
 	 */
 	@Override
 	public int compareTo(Collision o){
@@ -109,7 +119,14 @@ public class Collision implements Comparable<Collision>{
 		return this.zip.compareTo(o.zip);	
 	}
 	
-	
+	/**
+	 * Based on same specifications as compareTo, except zip, date, key all must
+	 * be equal in order to return true.
+	 * Overrides Object equals(), so if Object o is not a Collision object,
+	 * false is returned.
+	 * 
+	 * @return true if two Collision objects have same zip, date, key, false if not.
+	 */
 	@Override
 	public boolean equals(Object o) {
 	
@@ -127,22 +144,16 @@ public class Collision implements Comparable<Collision>{
 			}
 			return false;
 		}
-	
-		 
 		return false;
-		
-				
-		
-		
 		
 	}
 	
-	
 
 	/**
-	 * checks if a string contains an int
-	 * @param str
-	 * @return
+	 * Method I created to check if a given string contains
+	 * an integer
+	 * @param String
+	 * @return true if String contains int, false if not.
 	 */
 	protected boolean isDigit(String str) {
 		if(str.length()==0) {
@@ -157,8 +168,8 @@ public class Collision implements Comparable<Collision>{
 	}
 	
 	/**
-	 * getter methods
-	 * @return
+	 * Getter methods below, for zip, date, key, fatalities, and injuried
+	 * @return data fields they are retrieving.
 	 */
 	
 	public String getZip() {

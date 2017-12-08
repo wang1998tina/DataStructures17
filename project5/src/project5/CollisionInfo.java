@@ -7,11 +7,28 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class for Collision project 5. Here I call methods from ColllisionsData,
+ * Collision class. A method below main was provided by Joanna in project specs.
+ * 
+ * Handles file input, user input, and calls other classes to create an AVL tree
+ * to store NYPD data and also retrieve according to zip, start date, and end
+ * date give by user.
+ * 
+ * @author Tina Wang
+ *
+ */
+
+
 public class CollisionInfo {
 
 	/**
-	 * Read file.
-	 * @param args
+	 * Main method. Data file is passed to args[0] of this method, and 
+	 * user input and creation of Collision objects and AVL Tree and 
+	 * data retrieval is called here.
+	 * @param args. One file name is passed.
+	 * @throws IOException in this method if 1. no argument is given
+	 * or 2. file does not exist/cannot be read.
 	 */
 	public static void main(String[] args) {
 		
@@ -40,7 +57,7 @@ public class CollisionInfo {
 					Collision col = new Collision(entries); 
 					tree.add(col);
 				} catch(IllegalArgumentException e) {
-					//System.err.println(e.getMessage());
+					//skip this row in file
 					continue;
 				}
 			
@@ -60,6 +77,7 @@ public class CollisionInfo {
 		
 			
 		//----end file input-----
+		
 			
 		//var used for while loop
 		boolean checkForQuit = true;
@@ -131,7 +149,8 @@ public class CollisionInfo {
 			
 			//print report
 			System.out.println(tree.getReport(zip, startDate, endDate));
-			System.out.print("cool");
+
+
 				
 		}//end of while
 			
@@ -141,10 +160,10 @@ public class CollisionInfo {
 	
 	
 	/**
-	 * c
-	 * hecks if a string contains an int
-	 * @param str
-	 * @return
+	 * Method I created to check if a given string contains
+	 * an integer
+	 * @param String
+	 * @return true if String contains int, false if not.
 	 */
 	protected static boolean isDigit(String str) {
 		if(str.length()==0) {
